@@ -1,0 +1,192 @@
+#+startup: overview nologdone
+#+startup: showeverything
+#+TITLE: Aquí (aqui.el) User Guide
+#+SUBTITLE: for version {{{version}}}
+#+AUTHOR: Charles Y. Choi
+#+EMAIL: kickingvegas@gmail.com
+#+OPTIONS: ':t toc:t author:t email:t H:4 f:t
+#+LANGUAGE: en
+#+MACRO: version 0.0.0
+#+MACRO: kbd (eval (org-texinfo-kbd-macro $1))
+#+TEXINFO_FILENAME: aqui.info
+#+TEXINFO_CLASS: casual
+#+TEXINFO_HEADER: @syncodeindex pg cp
+#+TEXINFO_HEADER: @paragraphindent none
+#+TEXINFO_TITLEPAGE: t
+#+TEXINFO_DIR_CATEGORY: Emacs misc features
+#+TEXINFO_DIR_NAME: Aquí
+#+TEXINFO_DIR_DESC: Location update optimized for macOS.
+#+TEXINFO_PRINTED_TITLE: Aquí (aqui.el) User Guide
+
+Version: {{{version}}}
+
+#+TEXINFO: Copyright © 2026 @w{Charles Y. Choi}
+
+THIS PROJECT IS WIP.
+
+Aquí (~aqui.el~) is an Elisp library for updating the location for GNU Emacs. On macOS, Aquí can use the Shortcuts app to query its native OS location service for more accurate results than those provided by an internet service. That said, Aquí can use an internet service to obtain location information if Shortcuts is not available.
+
+Aquí updates the following Emacs variables:
+
+- ~calendar-latitude~
+- ~calendar-longitude~
+- ~calendar-location-name~
+
+These values are primarily used by the built-in library ~solar.el~, which provides the ~sunrise-sunset~ command. Other third party commands providing local weather (e.g. wttr) can take advantage of location updates.
+
+    
+#+INCLUDE: "./sponsorship.org"
+
+* Copying
+:PROPERTIES:
+:COPYING: t
+:END:
+
+Copyright © 2026 Charles Y. Choi
+
+* Features
+:PROPERTIES:
+:CUSTOM_ID: features
+:END:
+#+CINDEX: Features
+
+- High-accuracy location update via macOS Location Service.
+  
+- Updates the following variables given a location update:
+  
+  - ~calendar-latitude~
+    
+  - ~calendar-longitude~
+    
+  - ~calendar-location-name~
+    
+  
+* Requirements
+:PROPERTIES:
+:CUSTOM_ID: requirements
+:END:
+#+CINDEX: Requirements
+
+- GNU Emacs 30.1+
+- [[https://github.com/kickingvegas/restlib][restlib]] 0.1+ ([[info:restlib#Top][restlib#Top]])
+- macOS 15+ (Sequoia) if Shortcuts app is used
+
+
+* Install
+:PROPERTIES:
+:CUSTOM_ID: install
+:END:
+#+CINDEX: Install
+#+VINDEX: aqui
+#+VINDEX: aqui-source
+#+VINDEX: aqui-map-provider
+
+Aquí is planned to be available on MELPA for installation via ~package-install~ (TBD).
+
+There should be no setup required as commands provided by ~aqui.el~ are auto-loaded via ~package-install~.
+
+#+TEXINFO: @subsubheading macOS Shortcuts Support
+
+If a high-accuracy location update on macOS is desired, then install the following iCloud Shortcut:
+
+- [[https://www.icloud.com/shortcuts/5199bce93e314120b4bb78f17406592e][iCloud Shortcut: Current Location JSON]]
+
+Ensure that Aquí uses this Shortcut by setting the value of the customizable variable ~aqui-source~ to "Shortcuts" (~:shortcuts~)
+
+
+#+TEXINFO: @subsubheading Customization
+
+Customize Aquí via the ~customize-group~ command:
+
+#+begin_example
+  M-x customize-group aqui RET
+#+end_example
+
+From here you can customize the following variables:
+
+- ~aqui-source~ ::
+
+  Select where location data should be sourced from.
+
+  The following sources are supported:
+
+  - Shortcuts (~:shortcuts~)
+  - ip-api.com  (~:ip-api~)
+  
+  
+- ~aqui-map-provider~ ::
+  
+  Select which map provider to use (Apple, Google).
+
+* Usage
+#+CINDEX: Usage
+#+VINDEX: aqui
+#+VINDEX: aqui-insert-location
+
+The following commands are provided by Aquí:
+
+- Command: aqui ::
+
+  Update current geographic location from ~aqui-source~.
+
+  Given an location update, the following variables are run-time updated:
+
+  - ~calendar-latitude~
+  - ~calendar-longitude~
+  - ~calendar-location-name~
+
+  Use the command ~aqui-customize-save-location-data~ to persist these variables to a file.
+  
+- Command: aqui-insert-location &optional LOCATION ::
+
+  - LOCATION: Location object
+
+- Command: aqui-customize-save-location-data ::
+
+  Persist location data in calendar location variables.
+
+  The following variables are persisted given a location update.
+
+  - ~calendar-latitude~
+  - ~calendar-longitude~
+  - ~calendar-location-name~
+
+
+* Feedback & Discussion
+#+CINDEX: Feedback
+Please report any feedback about *Aquí* to the [[https://github.com/kickingvegas/aqui/issues][issue tracker on GitHub]].
+
+#+CINDEX: Discussion
+To participate in general discussion about using *Aquí*, please join the [[https://github.com/kickingvegas/aqui/discussions][discussion group]].
+
+* Sponsorship
+#+CINDEX: Sponsorship
+
+#+INCLUDE: "./sponsorship.org"
+
+
+* About
+#+CINDEX: About
+
+[[https://github.com/kickingvegas/aqui][Aquí]] was conceived and crafted by Charles Y. Choi in San Francisco, California.
+
+Thank you for using *Aquí*.
+
+Always choose love.
+
+* Acknowledgments
+#+CINDEX: Acknowledgments
+
+* Main Index
+:PROPERTIES:
+:INDEX:    cp
+:END:
+
+Index for this user guide.
+
+* Variable Index
+:PROPERTIES:
+:INDEX:    vr
+:END:
+
+Variables, functions, commands, and menus referenced by this user guide.
