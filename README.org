@@ -51,9 +51,8 @@ Refer to the [[https://kickingvegas.github.io/aqui/][Aquí User Guide]] for more
 
 If you enjoy using Aquí, please consider buying me a coffee to help support its development and maintenance.
 
-[[file:docs/images/default-yellow.png]]
-
+[[https://www.buymeacoffee.com/kickingvegas][file:docs/images/default-yellow.png]]
   
 * Acknowledgments
 
-A heartfelt thanks to all the contributors to the GNU Emacs ecosystem from which Aquí builds from. This work would not be possible without your efforts.
+Thanks to all the contributors to Core Location, Shortcuts, and the GNU Emacs ecosystem from which Aquí builds from. This work would not be possible without your efforts.
