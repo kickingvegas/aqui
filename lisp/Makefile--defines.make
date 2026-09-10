@@ -41,4 +41,5 @@ PACKAGE_PATHS=						\
 -L $(EMACS_ELPA_DIR)/llama-current			\
 -L $(EMACS_ELPA_DIR)/transient-current			\
 -L $(EMACS_ELPA_DIR)/cond-let-current			\
+-L $(HOME)/Projects/elisp/restlib/lisp			\
 -L $(PKG_LISP_DIR)

@@ -37,9 +37,8 @@ Version: 0.0.2-rc.1
 
 Copyright © 2026 @w{Charles Y. Choi}
 
-THIS PROJECT IS WIP@.
 
-Aquí (@code{aqui.el}) is an Elisp library for updating the location for GNU Emacs. On macOS@comma{} Aquí can use the Shortcuts app to query its native OS location service for more accurate results than those provided by an internet service. That said@comma{} Aquí can use an internet service to obtain location information if Shortcuts is not available.
+Aquí (@code{aqui.el}) is an Elisp library for updating the location for GNU Emacs with optimization for high accuracy on macOS@. On macOS@comma{} Aquí will use the Shortcuts app to obtain a location update from the native OS location service. This approach avoids needing a specialized third party executable to accomplish the location lookup. If Shortcuts is not available@comma{} Aquí will use a third party internet service to obtain location information.
 
 Aquí updates the following Emacs variables:
 
@@ -52,7 +51,7 @@ Aquí updates the following Emacs variables:
 @code{calendar-location-name}
 @end itemize
 
-These values are primarily used by the built-in library @code{solar.el}@comma{} which provides the @code{sunrise-sunset} command. Other third party commands providing local weather (e.g. wttr) can take advantage of location updates.
+These values are primarily used by the built-in library @code{solar.el}@comma{} which provides the @code{sunrise-sunset} command (@ref{Sunrise/Sunset,,,emacs,}). Other third party commands providing local weather (e.g. @uref{https://github.com/kickingvegas/restlib/blob/main/examples/wttr.el, wttr}) can take advantage of location updates.
 
 
 If you enjoy using Aquí@comma{} please consider buying me a coffee to help support its development and maintenance.
@@ -109,7 +108,7 @@ Updates the following variables given a location update:
 @item
 GNU Emacs 30.1+
 @item
-@uref{https://github.com/kickingvegas/restlib, restlib} 0.1+ (@ref{Top,restlib#Top,,restlib,})
+@uref{https://github.com/kickingvegas/restlib, restlib} 0.1+
 @item
 macOS 15+ (Sequoia) if Shortcuts app is used
 @end itemize
@@ -128,7 +127,7 @@ There should be no setup required as commands provided by @code{aqui.el} are aut
 
 @subsubheading macOS Shortcuts Support
 
-If a high-accuracy location update on macOS is desired@comma{} then install the following iCloud Shortcut:
+Install the following iCloud Shortcut to obtain high-accuracy location data:
 
 @itemize
 @item
@@ -174,6 +173,7 @@ Select which map provider to use (Apple@comma{} Google).
 @cindex Usage
 @vindex aqui
 @vindex aqui-insert-location
+@vindex aqui-customize-save-location-data
 
 The following commands are provided by Aquí:
 
@@ -199,6 +199,10 @@ Use the command @code{aqui-customize-save-location-data} to persist these variab
 @item
 LOCATION: Location object
 @end itemize
+
+Insert last obtained LOCATION as an Org table.
+
+This command requires that the command @code{aqui} be run beforehand.
 @end deffn
 
 @deffn Command aqui-customize-save-location-data
@@ -251,6 +255,8 @@ Always choose love.
 @chapter Acknowledgments
 
 @cindex Acknowledgments
+
+Thanks to all the contributors to Core Location and  Shortcuts on macOS@comma{} and to the GNU Emacs ecosystem from which Aquí builds from. This work would not be possible without your efforts.
 
 @node Main Index
 @chapter Main Index

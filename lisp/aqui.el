@@ -6,7 +6,7 @@
 ;; URL: https://github.com/kickingvegas/aqui
 ;; Keywords: tools
 ;; Package-Version: 0.0.2-rc.1
-;; Package-Requires: ((emacs "30.1"))
+;; Package-Requires: ((emacs "30.1") (restlib "0.1.0"))
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -23,10 +23,24 @@
 
 ;;; Commentary:
 
-;; TBD
+;; Aquí (`aqui.el') is an Elisp library for updating the location for GNU
+;; Emacs with optimization for high accuracy on macOS. On macOS, Aquí will
+;; use the Shortcuts app to obtain a location update from the native OS
+;; location service. This approach avoids needing a specialized third party
+;; executable to accomplish the location lookup. If Shortcuts is not
+;; available, Aquí will use a third party internet service to obtain
+;; location information.
+
+;; USAGE:
+
+;; Run M-x aqui RET to update location.
+
+;; Refer to the Aquí User Guide (URL `https://kickingvegas.github.io/aqui/') for
+;; more information.
+
 
 ;;; Code:
-
+(require 'solar)
 (require 'restlib)
 
 
@@ -289,17 +303,23 @@ variables to a file."
     (aqui--ip-api))))
 
 (defun aqui-insert-location (&optional location)
-  "Insert last LOCATION as an Org table."
-  (interactive)
-  (let* ((location (if (not location)
-                       aqui--last-result
-                     location)))
-    (cond
-     ((eq aqui-source :shortcuts)
-      (aqui--insert-location-via-shortcuts location))
+  "Insert last obtained LOCATION as an Org table.
 
-     ((eq aqui-source :ip-api)
-      (aqui--insert-location-via-ip-api location)))))
+- LOCATION: Location object
+
+This command requires that the command `aqui' be run beforehand."
+  (interactive)
+  (let ((location (if (and (not location) aqui--last-result)
+                      aqui--last-result
+                    location)))
+    (if aqui--last-result
+        (cond
+         ((eq aqui-source :shortcuts)
+          (aqui--insert-location-via-shortcuts location))
+
+         ((eq aqui-source :ip-api)
+          (aqui--insert-location-via-ip-api location)))
+      (error "Error: No location data to insert. Run ‘aqui’ and try again"))))
 
 (defun aqui-customize-save-location-data ()
   "Persist location data in calendar location variables.
