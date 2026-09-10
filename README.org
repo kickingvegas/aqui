@@ -1,3 +1,59 @@
-* Aqui
+# [[https://melpa.org/#/aqui][file:https://melpa.org/packages/aqui-badge.svg]] [[https://stable.melpa.org/#/aqui][file:https://stable.melpa.org/packages/aqui-badge.svg]]
 
-WIP
+* Aquí (aqui.el) 📍
+
+THIS PROJECT IS WIP.
+
+Aquí (~aqui.el~) is an Elisp library for updating the location for GNU Emacs. On macOS, Aquí can use the Shortcuts app to query its native OS location service for more accurate results than those provided by an internet service. That said, Aquí can use an internet service to obtain location information if Shortcuts is not available.
+
+Aquí updates the following Emacs variables:
+
+- ~calendar-latitude~
+- ~calendar-longitude~
+- ~calendar-location-name~
+
+These values are primarily used by the built-in library ~solar.el~, which provides the ~sunrise-sunset~ command. Other third party commands providing local weather (e.g. [[https://github.com/kickingvegas/restlib/blob/main/examples/wttr.el][wttr]]) can take advantage of location updates.
+  
+
+* Requirements
+
+- GNU Emacs 30.1+
+- [[https://github.com/kickingvegas/restlib][restlib]] 0.1+
+- macOS 15+ (Sequoia) if Shortcuts app is used
+  
+
+* Install
+
+Aquí is planned to be available on MELPA for installation via ~package-install~ (TBD).
+
+There should be no setup required as commands provided by ~aqui.el~ are auto-loaded via ~package-install~.
+
+
+** macOS Shortcuts Support
+
+To use the Shortcuts app to obtain location data, install the following Shortcut from iCloud:
+
+- [[https://www.icloud.com/shortcuts/5199bce93e314120b4bb78f17406592e][iCloud Shortcut: Current Location JSON]]
+
+
+* Usage
+
+Run the command ~aqui~ to view your current location in the mini-buffer.
+
+#+begin_example
+  M-x aqui RET
+#+end_example
+
+
+Refer to the [[https://kickingvegas.github.io/aqui/][Aquí User Guide]] for more details on using it.
+
+* Sponsorship
+
+If you enjoy using Aquí, please consider buying me a coffee to help support its development and maintenance.
+
+[[file:docs/images/default-yellow.png]]
+
+  
+* Acknowledgments
+
+A heartfelt thanks to all the contributors to the GNU Emacs ecosystem from which Aquí builds from. This work would not be possible without your efforts.
