@@ -1,0 +1,269 @@
+\input texinfo    @c -*- texinfo -*-
+@c %**start of header
+@setfilename aqui.info
+@settitle Aquí (aqui.el) User Guide
+@documentencoding UTF-8
+@documentlanguage en
+@syncodeindex pg cp
+@paragraphindent none
+@c %**end of header
+
+@copying
+Copyright © 2026 Charles Y@. Choi
+@end copying
+
+@dircategory Emacs misc features
+@direntry
+* Aquí: (aqui).         Location update optimized for macOS.
+@end direntry
+
+@finalout
+@titlepage
+@title Aquí (aqui.el) User Guide
+@subtitle for version 0.0.0
+@author Charles Y@. Choi (@email{kickingvegas@@gmail.com})
+@page
+@vskip 0pt plus 1filll
+@insertcopying
+@end titlepage
+
+@contents
+
+@ifnottex
+@node Top
+@top Aquí (aqui.el) User Guide
+
+Version: 0.0.0
+
+Copyright © 2026 @w{Charles Y. Choi}
+
+THIS PROJECT IS WIP@.
+
+Aquí (@code{aqui.el}) is an Elisp library for updating the location for GNU Emacs. On macOS@comma{} Aquí can use the Shortcuts app to query its native OS location service for more accurate results than those provided by an internet service. That said@comma{} Aquí can use an internet service to obtain location information if Shortcuts is not available.
+
+Aquí updates the following Emacs variables:
+
+@itemize
+@item
+@code{calendar-latitude}
+@item
+@code{calendar-longitude}
+@item
+@code{calendar-location-name}
+@end itemize
+
+These values are primarily used by the built-in library @code{solar.el}@comma{} which provides the @code{sunrise-sunset} command. Other third party commands providing local weather (e.g. wttr) can take advantage of location updates.
+
+
+If you enjoy using Aquí@comma{} please consider buying me a coffee to help support its development and maintenance.
+
+@image{images/default-yellow,,,,png}
+
+@uref{https://www.buymeacoffee.com/kickingvegas}
+
+@end ifnottex
+
+@menu
+* Features::
+* Requirements::
+* Install::
+* Usage::
+* Feedback & Discussion::
+* Sponsorship::
+* About::
+* Acknowledgments::
+* Main Index::
+* Variable Index::
+@end menu
+
+@node Features
+@chapter Features
+
+@cindex Features
+
+@itemize
+@item
+High-accuracy location update via macOS Location Service.
+
+@item
+Updates the following variables given a location update:
+
+@itemize
+@item
+@code{calendar-latitude}
+
+@item
+@code{calendar-longitude}
+
+@item
+@code{calendar-location-name}
+@end itemize
+@end itemize
+
+@node Requirements
+@chapter Requirements
+
+@cindex Requirements
+
+@itemize
+@item
+GNU Emacs 30.1+
+@item
+@uref{https://github.com/kickingvegas/restlib, restlib} 0.1+ (@ref{Top,restlib#Top,,restlib,})
+@item
+macOS 15+ (Sequoia) if Shortcuts app is used
+@end itemize
+
+@node Install
+@chapter Install
+
+@cindex Install
+@vindex aqui
+@vindex aqui-source
+@vindex aqui-map-provider
+
+Aquí is planned to be available on MELPA for installation via @code{package-install} (TBD).
+
+There should be no setup required as commands provided by @code{aqui.el} are auto-loaded via @code{package-install}.
+
+@subsubheading macOS Shortcuts Support
+
+If a high-accuracy location update on macOS is desired@comma{} then install the following iCloud Shortcut:
+
+@itemize
+@item
+@uref{https://www.icloud.com/shortcuts/5199bce93e314120b4bb78f17406592e, iCloud Shortcut: Current Location JSON}
+@end itemize
+
+Ensure that Aquí uses this Shortcut by setting the value of the customizable variable @code{aqui-source} to ``Shortcuts'' (@code{:shortcuts})
+
+
+@subsubheading Customization
+
+Customize Aquí via the @code{customize-group} command:
+
+@example
+M-x customize-group aqui RET
+@end example
+
+From here you can customize the following variables:
+
+@table @asis
+@item @code{aqui-source}
+Select where location data should be sourced from.
+
+The following sources are supported:
+
+@itemize
+@item
+Shortcuts (@code{:shortcuts})
+@item
+ip-api.com  (@code{:ip-api})
+@end itemize
+@end table
+
+
+@table @asis
+@item @code{aqui-map-provider}
+Select which map provider to use (Apple@comma{} Google).
+@end table
+
+@node Usage
+@chapter Usage
+
+@cindex Usage
+@vindex aqui
+@vindex aqui-insert-location
+
+The following commands are provided by Aquí:
+
+@deffn Command aqui
+Update current geographic location from @code{aqui-source}.
+
+Given an location update@comma{} the following variables are run-time updated:
+
+@itemize
+@item
+@code{calendar-latitude}
+@item
+@code{calendar-longitude}
+@item
+@code{calendar-location-name}
+@end itemize
+
+Use the command @code{aqui-customize-save-location-data} to persist these variables to a file.
+@end deffn
+
+@deffn Command aqui-insert-location &optional LOCATION
+@itemize
+@item
+LOCATION: Location object
+@end itemize
+@end deffn
+
+@deffn Command aqui-customize-save-location-data
+Persist location data in calendar location variables.
+
+The following variables are persisted given a location update.
+
+@itemize
+@item
+@code{calendar-latitude}
+@item
+@code{calendar-longitude}
+@item
+@code{calendar-location-name}
+@end itemize
+@end deffn
+
+@node Feedback & Discussion
+@chapter Feedback & Discussion
+
+@cindex Feedback
+Please report any feedback about @strong{Aquí} to the @uref{https://github.com/kickingvegas/aqui/issues, issue tracker on GitHub}.
+
+@cindex Discussion
+To participate in general discussion about using @strong{Aquí}@comma{} please join the @uref{https://github.com/kickingvegas/aqui/discussions, discussion group}.
+
+@node Sponsorship
+@chapter Sponsorship
+
+@cindex Sponsorship
+
+If you enjoy using Aquí@comma{} please consider buying me a coffee to help support its development and maintenance.
+
+@image{images/default-yellow,,,,png}
+
+@uref{https://www.buymeacoffee.com/kickingvegas}
+
+@node About
+@chapter About
+
+@cindex About
+
+@uref{https://github.com/kickingvegas/aqui, Aquí} was conceived and crafted by Charles Y@. Choi in San Francisco@comma{} California.
+
+Thank you for using @strong{Aquí}.
+
+Always choose love.
+
+@node Acknowledgments
+@chapter Acknowledgments
+
+@cindex Acknowledgments
+
+@node Main Index
+@chapter Main Index
+
+Index for this user guide.
+
+@printindex cp
+
+@node Variable Index
+@chapter Variable Index
+
+Variables@comma{} functions@comma{} commands@comma{} and menus referenced by this user guide.
+
+@printindex vr
+
+@bye
