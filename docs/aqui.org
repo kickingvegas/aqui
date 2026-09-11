@@ -6,7 +6,7 @@
 #+EMAIL: kickingvegas@gmail.com
 #+OPTIONS: ':t toc:t author:t email:t H:4 f:t
 #+LANGUAGE: en
-#+MACRO: version 0.0.1
+#+MACRO: version 0.0.2-rc.1
 #+MACRO: kbd (eval (org-texinfo-kbd-macro $1))
 #+TEXINFO_FILENAME: aqui.info
 #+TEXINFO_CLASS: casual
@@ -22,9 +22,8 @@ Version: {{{version}}}
 
 #+TEXINFO: Copyright © 2026 @w{Charles Y. Choi}
 
-THIS PROJECT IS WIP.
 
-Aquí (~aqui.el~) is an Elisp library for updating the location for GNU Emacs. On macOS, Aquí can use the Shortcuts app to query its native OS location service for more accurate results than those provided by an internet service. That said, Aquí can use an internet service to obtain location information if Shortcuts is not available.
+Aquí (~aqui.el~) is an Elisp library for updating the location for GNU Emacs with optimization for high accuracy on macOS. On macOS, Aquí will use the Shortcuts app to obtain a location update from the native OS location service. This approach avoids needing a specialized third party executable to accomplish the location lookup. If Shortcuts is not available, Aquí will use a third party internet service to obtain location information.
 
 Aquí updates the following Emacs variables:
 
@@ -32,7 +31,7 @@ Aquí updates the following Emacs variables:
 - ~calendar-longitude~
 - ~calendar-location-name~
 
-These values are primarily used by the built-in library ~solar.el~, which provides the ~sunrise-sunset~ command. Other third party commands providing local weather (e.g. wttr) can take advantage of location updates.
+These values are primarily used by the built-in library ~solar.el~, which provides the ~sunrise-sunset~ command ([[info:emacs#Sunrise/Sunset]]). Other third party commands providing local weather (e.g. [[https://github.com/kickingvegas/restlib/blob/main/examples/wttr.el][wttr]]) can take advantage of location updates.
 
     
 #+INCLUDE: "./sponsorship.org"
@@ -68,7 +67,7 @@ Copyright © 2026 Charles Y. Choi
 #+CINDEX: Requirements
 
 - GNU Emacs 30.1+
-- [[https://github.com/kickingvegas/restlib][restlib]] 0.1+ ([[info:restlib#Top][restlib#Top]])
+- [[https://github.com/kickingvegas/restlib][restlib]] 0.1+
 - macOS 15+ (Sequoia) if Shortcuts app is used
 
 
@@ -87,7 +86,7 @@ There should be no setup required as commands provided by ~aqui.el~ are auto-loa
 
 #+TEXINFO: @subsubheading macOS Shortcuts Support
 
-If a high-accuracy location update on macOS is desired, then install the following iCloud Shortcut:
+Install the following iCloud Shortcut to obtain high-accuracy location data:
 
 - [[https://www.icloud.com/shortcuts/5199bce93e314120b4bb78f17406592e][iCloud Shortcut: Current Location JSON]]
 
@@ -122,6 +121,7 @@ From here you can customize the following variables:
 #+CINDEX: Usage
 #+VINDEX: aqui
 #+VINDEX: aqui-insert-location
+#+VINDEX: aqui-customize-save-location-data
 
 The following commands are provided by Aquí:
 
@@ -141,6 +141,10 @@ The following commands are provided by Aquí:
 
   - LOCATION: Location object
 
+  Insert last obtained LOCATION as an Org table.
+
+  This command requires that the command ~aqui~ be run beforehand.
+
 - Command: aqui-customize-save-location-data ::
 
   Persist location data in calendar location variables.
@@ -151,7 +155,7 @@ The following commands are provided by Aquí:
   - ~calendar-longitude~
   - ~calendar-location-name~
 
-
+    
 * Feedback & Discussion
 #+CINDEX: Feedback
 Please report any feedback about *Aquí* to the [[https://github.com/kickingvegas/aqui/issues][issue tracker on GitHub]].
@@ -176,6 +180,9 @@ Always choose love.
 
 * Acknowledgments
 #+CINDEX: Acknowledgments
+
+Thanks to all the contributors to Core Location and  Shortcuts on macOS, and to the GNU Emacs ecosystem from which Aquí builds from. This work would not be possible without your efforts.
+
 
 * Main Index
 :PROPERTIES:
