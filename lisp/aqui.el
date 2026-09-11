@@ -5,7 +5,7 @@
 ;; Author: Charles Y. Choi <kickingvegas@gmail.com>
 ;; URL: https://github.com/kickingvegas/aqui
 ;; Keywords: tools
-;; Package-Version: 0.1.0
+;; Package-Version: 0.1.1-rc.1
 ;; Package-Requires: ((emacs "30.1") (restlib "0.1.0"))
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -56,6 +56,30 @@
                  (const :tag "ip-api.com" :ip-api))
   :group 'aqui)
 
+(defcustom aqui-glyph "📍"
+  "Aquí glyph to use when messaging location update.
+
+For SF Symbols support, run the command `aqui-setup-sf-symbols' to
+initialize support for rendering SF Symbols."
+  :type '(choice
+          (const :tag "Pushpin 📍" "📍")
+          (const :tag "SF Symbols 􀋒" "􀋒")
+          (const :tag "Arrow ➚" "➚")
+          (const :tag "Dot ⨀" "⨀")
+          (const :tag "Plain *" "*")
+          (string :tag "Other"))
+  :group 'aqui)
+
+(defcustom aqui-inactive-glyph "⊘"
+  "Aquí glyph to use for unexpected result in requesting a location update.
+
+For SF Symbols support, run the command `aqui-setup-sf-symbols' to
+initialize support for rendering SF Symbols."
+  :type '(choice
+          (const :tag "Inactive ⊘" "⊘")
+          (const :tag "SF Symbols 􀋑" "􀋑")
+          (string :tag "Other"))
+  :group 'aqui)
 
 (defcustom aqui-map-provider :apple
   "Aquí map provider."
@@ -105,7 +129,7 @@
   (if (and output (stringp output))
       (cond
        ((string-match-p "^Error: Running was cancelled" output)
-        (setq aqui--last-result (format "􀋑 %s" "Running was cancelled")))
+        (setq aqui--last-result (format "%s %s" aqui-inactive-glyph "Running was cancelled")))
 
        (t
         (let* ((response (json-parse-string output
@@ -141,8 +165,8 @@
               (kill-new msg)
               (message msg)))
            (t
-            (error "􀋑 Undefined aqui--last-result")))
-        (error "􀋑 exit error")))))
+            (error "%s Undefined aqui--last-result" aqui-inactive-glyph)))
+        (error "%s exit error" aqui-inactive-glyph)))))
 
 (defun aqui--shortcuts ()
   "Get current location via Shortcuts."
@@ -166,7 +190,7 @@
          (location-name (if (and street city)
                             (format "%s, %s" street city)
                           city))
-         (msg (format "􀋒 %s (%.5f, %.5f)" location-name latitude longitude)))
+         (msg (format "%s %s (%.5f, %.5f)" aqui-glyph location-name latitude longitude)))
 
     (setopt calendar-latitude latitude)
     (setopt calendar-longitude longitude)
@@ -268,7 +292,7 @@
          (latitude (gethash "lat" location))
          (longitude (gethash "lon" location))
          (city (gethash "city" location))
-         (msg (format "􀋒 %s (%.5f, %.5f)" city latitude longitude)))
+         (msg (format "%s %s (%.5f, %.5f)" aqui-glyph city latitude longitude)))
 
     (map-put! location "created" (format-time-string "%Y-%m-%d %a %H:%M %Z"))
     (setq aqui--last-result location)
@@ -333,6 +357,18 @@ The following variables are persisted given a location update.
   (customize-save-variable 'calendar-latitude calendar-latitude)
   (customize-save-variable 'calendar-longitude calendar-longitude)
   (customize-save-variable 'calendar-location-name calendar-location-name))
+
+(defun aqui-setup-sf-symbols ()
+  "Setup usage of SF Symbols for glyphs.
+
+On macOS, the variables `aqui-glyph' and `aqui-inactive-glyph' can be
+configured to use SF Symbols. Run this command to correctly display
+these symbols in a GUI frame."
+  (interactive)
+  (if (not (eq system-type 'darwin))
+        (error "Only supported on macOS")
+      (if (and (display-graphic-p) (fboundp 'set-fontset-font))
+          (set-fontset-font t '(?􀀀 . ?􏿽) "SF Pro Display"))))
 
 (provide 'aqui)
 ;;; aqui.el ends here
