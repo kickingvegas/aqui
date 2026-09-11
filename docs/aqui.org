@@ -33,7 +33,7 @@ Aquí updates the following Emacs variables:
 
 These values are primarily used by the built-in library ~solar.el~, which provides the ~sunrise-sunset~ command ([[info:emacs#Sunrise/Sunset]]). Other third party commands providing local weather (e.g. [[https://github.com/kickingvegas/restlib/blob/main/examples/wttr.el][wttr]]) can take advantage of location updates.
 
-    
+
 #+INCLUDE: "./sponsorship.org"
 
 * Copying
@@ -50,16 +50,16 @@ Copyright © 2026 Charles Y. Choi
 #+CINDEX: Features
 
 - High-accuracy location update via macOS Location Service.
-  
+
 - Updates the following variables given a location update:
-  
+
   - ~calendar-latitude~
-    
+
   - ~calendar-longitude~
-    
+
   - ~calendar-location-name~
-    
-  
+
+
 * Requirements
 :PROPERTIES:
 :CUSTOM_ID: requirements
@@ -79,6 +79,8 @@ Copyright © 2026 Charles Y. Choi
 #+VINDEX: aqui
 #+VINDEX: aqui-source
 #+VINDEX: aqui-map-provider
+#+VINDEX: aqui-glyph
+#+VINDEX: aqui-inactive-glyph
 
 Aquí is planned to be available on MELPA for installation via ~package-install~ (TBD).
 
@@ -111,17 +113,31 @@ From here you can customize the following variables:
 
   - Shortcuts (~:shortcuts~)
   - ip-api.com  (~:ip-api~)
-  
-  
+
+
 - ~aqui-map-provider~ ::
-  
+
   Select which map provider to use (Apple, Google).
+
+- ~aqui-glyph~ ::
+
+  Aquí glyph to use when messaging location update.
+
+  For SF Symbols support, run the command ~aqui-setup-sf-symbols~ to initialize support for rendering SF Symbols.
+
+- ~aqui-inactive-glyph~ ::
+
+  Aquí glyph to use for unexpected result in requesting a location update.
+
+  For SF Symbols support, run the command ~aqui-setup-sf-symbols~ to initialize support for rendering SF Symbols.
+
 
 * Usage
 #+CINDEX: Usage
 #+VINDEX: aqui
 #+VINDEX: aqui-insert-location
 #+VINDEX: aqui-customize-save-location-data
+#+VINDEX: aqui-setup-sf-symbols
 
 The following commands are provided by Aquí:
 
@@ -136,7 +152,7 @@ The following commands are provided by Aquí:
   - ~calendar-location-name~
 
   Use the command ~aqui-customize-save-location-data~ to persist these variables to a file.
-  
+
 - Command: aqui-insert-location &optional LOCATION ::
 
   - LOCATION: Location object
@@ -155,7 +171,12 @@ The following commands are provided by Aquí:
   - ~calendar-longitude~
   - ~calendar-location-name~
 
-    
+- Command: aqui-setup-sf-symbols ::
+
+  Setup usage of SF Symbols for glyphs.
+
+  On macOS, the variables ~aqui-glyph~ and ~aqui-inactive-glyph~ can be configured to use SF Symbols. Run this command to correctly display these symbols in a GUI frame.
+
 * Feedback & Discussion
 #+CINDEX: Feedback
 Please report any feedback about *Aquí* to the [[https://github.com/kickingvegas/aqui/issues][issue tracker on GitHub]].
