@@ -2,9 +2,7 @@
 
 * Aquí (aqui.el) 📍
 
-THIS PROJECT IS WIP.
-
-Aquí (~aqui.el~) is an Elisp library for updating the location for GNU Emacs. On macOS, Aquí can use the Shortcuts app to query its native OS location service for more accurate results than those provided by an internet service. That said, Aquí can use an internet service to obtain location information if Shortcuts is not available.
+Aquí (~aqui.el~) is an Elisp library for updating the location for GNU Emacs with optimization for high accuracy on macOS. On macOS, Aquí will use the Shortcuts app to obtain a location update from the native OS location service. This approach avoids needing a specialized 3^{rd} party executable to accomplish the location lookup. If Shortcuts is not available, Aquí will use a 3^{rd} party internet service to obtain location information.
 
 Aquí updates the following Emacs variables:
 
@@ -28,10 +26,9 @@ Aquí is planned to be available on MELPA for installation via ~package-install~
 
 There should be no setup required as commands provided by ~aqui.el~ are auto-loaded via ~package-install~.
 
-
 ** macOS Shortcuts Support
 
-To use the Shortcuts app to obtain location data, install the following Shortcut from iCloud:
+Install the following iCloud Shortcut to obtain high-accuracy location data:
 
 - [[https://www.icloud.com/shortcuts/5199bce93e314120b4bb78f17406592e][iCloud Shortcut: Current Location JSON]]
 
@@ -51,9 +48,9 @@ Refer to the [[https://kickingvegas.github.io/aqui/][Aquí User Guide]] for more
 
 If you enjoy using Aquí, please consider buying me a coffee to help support its development and maintenance.
 
-[[file:docs/images/default-yellow.png]]
-
+\\
+[[https://www.buymeacoffee.com/kickingvegas][file:docs/images/default-yellow.png]]
   
 * Acknowledgments
 
-A heartfelt thanks to all the contributors to the GNU Emacs ecosystem from which Aquí builds from. This work would not be possible without your efforts.
+Thanks to all the contributors to Core Location and Shortcuts on macOS, and to the GNU Emacs ecosystem from which Aquí builds from. This work would not be possible without your efforts.

@@ -28,6 +28,37 @@
 (require 'aqui-test-utils)
 (require 'aqui)
 
+(ert-deftest test-aqui-group ()
+  "Test `aqui' group."
+  (should (get 'aqui 'custom-group)))
+
+(ert-deftest test-aqui-source ()
+  "Test variable `aqui-source'."
+  (should (eq aqui-source :shortcuts)))
+
+(ert-deftest test-aqui-map-provider ()
+  "Test variable `aqui-map-provider'."
+  (should (eq aqui-map-provider :apple)))
+
+(ert-deftest test-aqui-map-url-from-location ()
+  "Test for `aqui-map-url-from-location'."
+
+  (let* ((lat 3.3)
+         (lon 199.2)
+         (aqui-map-provider :apple)
+         (control "https://maps.apple.com/place?coordinate=3.300000,199.200000&map=transit")
+         (result (aqui-map-url-from-location lat lon)))
+
+    (should (string-equal control result)))
+
+  (let* ((lat 3.3)
+         (lon 199.2)
+         (aqui-map-provider :google)
+         (control "https://www.google.com/maps/search/?api=1&query=3.300000,199.200000")
+         (result (aqui-map-url-from-location lat lon)))
+
+    (should (string-equal control result))))
+
 
 (provide 'test-aqui)
 ;;; test-aqui.el ends here
