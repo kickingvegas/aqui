@@ -56,8 +56,6 @@ These values are primarily used by the built-in library @code{solar.el}@comma{} 
 
 If you enjoy using Aquí@comma{} please consider buying me a coffee to help support its development and maintenance.
 
-@image{images/default-yellow,,,,png}
-
 @uref{https://www.buymeacoffee.com/kickingvegas}
 
 @end ifnottex
@@ -254,8 +252,6 @@ To participate in general discussion about using @strong{Aquí}@comma{} please j
 @cindex Sponsorship
 
 If you enjoy using Aquí@comma{} please consider buying me a coffee to help support its development and maintenance.
-
-@image{images/default-yellow,,,,png}
 
 @uref{https://www.buymeacoffee.com/kickingvegas}
 
