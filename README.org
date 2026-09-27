@@ -1,4 +1,4 @@
-# [[https://melpa.org/#/aqui][file:https://melpa.org/packages/aqui-badge.svg]] [[https://stable.melpa.org/#/aqui][file:https://stable.melpa.org/packages/aqui-badge.svg]]
+[[https://melpa.org/#/aqui][file:https://melpa.org/packages/aqui-badge.svg]] [[https://stable.melpa.org/#/aqui][file:https://stable.melpa.org/packages/aqui-badge.svg]]
 
 * Aquí (aqui.el) 📍
 
@@ -22,7 +22,7 @@ These values are primarily used by the built-in library ~solar.el~, which provid
 
 * Install
 
-Aquí is planned to be available on MELPA for installation via ~package-install~ (TBD).
+Aquí is available on [[https://melpa.org/#/aqui][MELPA]] for installation via ~package-install~.
 
 There should be no setup required as commands provided by ~aqui.el~ are auto-loaded via ~package-install~.
 

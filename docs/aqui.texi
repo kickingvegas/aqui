@@ -121,7 +121,7 @@ macOS 15+ (Sequoia) if Shortcuts app is used
 @vindex aqui-glyph
 @vindex aqui-inactive-glyph
 
-Aquí is planned to be available on MELPA for installation via @code{package-install} (TBD).
+Aquí is available on @uref{https://melpa.org/#/aqui, MELPA} for installation via @code{package-install}.
 
 There should be no setup required as commands provided by @code{aqui.el} are auto-loaded via @code{package-install}.
 
@@ -189,7 +189,7 @@ For SF Symbols support@comma{} run the command @code{aqui-setup-sf-symbols} to i
 The following commands are provided by Aquí:
 
 @deffn Command aqui
-Update current geographic location from @code{aqui-source}.
+Update current geographic location from @code{aqui-source}. Message the updated location in the mini-buffer.
 
 Given an location update@comma{} the following variables are run-time updated:
 
