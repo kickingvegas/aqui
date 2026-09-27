@@ -6,7 +6,7 @@
 #+EMAIL: kickingvegas@gmail.com
 #+OPTIONS: ':t toc:t author:t email:t H:4 f:t
 #+LANGUAGE: en
-#+MACRO: version 0.1.2
+#+MACRO: version 0.1.3-rc.1
 #+MACRO: kbd (eval (org-texinfo-kbd-macro $1))
 #+TEXINFO_FILENAME: aqui.info
 #+TEXINFO_CLASS: casual
@@ -82,7 +82,7 @@ Copyright © 2026 Charles Y. Choi
 #+VINDEX: aqui-glyph
 #+VINDEX: aqui-inactive-glyph
 
-Aquí is planned to be available on MELPA for installation via ~package-install~ (TBD).
+Aquí is available on [[https://melpa.org/#/aqui][MELPA]] for installation via ~package-install~.
 
 There should be no setup required as commands provided by ~aqui.el~ are auto-loaded via ~package-install~.
 
@@ -143,7 +143,7 @@ The following commands are provided by Aquí:
 
 - Command: aqui ::
 
-  Update current geographic location from ~aqui-source~.
+  Update current geographic location from ~aqui-source~. Message the updated location in the mini-buffer.
 
   Given an location update, the following variables are run-time updated:
 
